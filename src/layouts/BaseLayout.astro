@@ -8,11 +8,13 @@ import BackgroundGrid from '../components/BackgroundGrid.astro';
 const { title, description, image, type } = Astro.props;
 const currentLocale = Astro.currentLocale || 'es';
 const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
+const base = import.meta.env.BASE_URL;
 
 const pathname = new URL(Astro.request.url).pathname;
 // Helper to check active route
 const isActive = (path) => {
-    return pathname === path || pathname === path + '/';
+    const fullPath = base + path;
+    return pathname === fullPath || pathname === fullPath + '/';
 };
 ---
 <html lang={currentLocale} class="bg-slate-50 dark:bg-[#0f0f0f] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
@@ -47,10 +49,10 @@ const isActive = (path) => {
                 <span class="text-xl font-bold tracking-tighter">AZCRAY<span class="text-rose-500 italic">.design</span></span>
             </div>
             <nav class="flex gap-4 md:gap-8 items-center text-sm md:text-base font-medium">
-                <a href={`/${currentLocale}/`} class={isActive(`/${currentLocale}/`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.gallery}</a>
-                <a href={`/${currentLocale}/${i18n.routes.about}`} class={isActive(`/${currentLocale}/${i18n.routes.about}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.about}</a>
-                <a href={`/${currentLocale}/${i18n.routes.pricing}`} class={isActive(`/${currentLocale}/${i18n.routes.pricing}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.pricing}</a>
-                <a href={`/${currentLocale}/${i18n.routes.contact}`} class={isActive(`/${currentLocale}/${i18n.routes.contact}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.contact}</a>
+                <a href={`${base}/${currentLocale}/`} class={isActive(`/${currentLocale}/`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.gallery}</a>
+                <a href={`${base}/${currentLocale}/${i18n.routes.about}`} class={isActive(`/${currentLocale}/${i18n.routes.about}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.about}</a>
+                <a href={`${base}/${currentLocale}/${i18n.routes.pricing}`} class={isActive(`/${currentLocale}/${i18n.routes.pricing}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.pricing}</a>
+                <a href={`${base}/${currentLocale}/${i18n.routes.contact}`} class={isActive(`/${currentLocale}/${i18n.routes.contact}`) ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-slate-600 dark:text-slate-100 hover:text-rose-500 dark:hover:text-rose-500 transition-colors pb-1"}>{i18n.nav.contact}</a>
             </nav>
             <div class="flex items-center gap-4">
                 <ThemeToggle />
@@ -66,7 +68,7 @@ const isActive = (path) => {
             </div>
             <div class="text-xs flex gap-6 font-medium">
                 <span class="hidden md:inline">{i18n.footer.available}</span>
-                <a href={`/${currentLocale}/${i18n.routes.contact}`} class="font-black underline">{i18n.footer.cta} →</a>
+                <a href={`${base}/${currentLocale}/${i18n.routes.contact}`} class="font-black underline">{i18n.footer.cta} →</a>
             </div>
         </footer>
     </div>

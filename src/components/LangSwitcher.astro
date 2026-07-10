@@ -1,12 +1,11 @@
 ---
 const currentLocale = Astro.currentLocale;
+const base = import.meta.env.BASE_URL;
 
 // Construye la URL base para el cambio de idioma
-// En un caso real con múltiples rutas, podrías mapear las rutas actuales a las equivalentes.
-// Aquí lo simplificamos redirigiendo a la raíz del otro idioma para evitar errores 404
 const targetLocale = currentLocale === 'es' ? 'en' : 'es';
-const esUrl = '/es/';
-const enUrl = '/en/';
+const esUrl = `${base}/es/`;
+const enUrl = `${base}/en/`;
 ---
 <div class="flex items-center gap-4 bg-white dark:bg-white/5 p-1 rounded-full px-3 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
     <a href={esUrl} class={`font-bold text-xs ${currentLocale === 'es' ? 'text-rose-500' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors'}`} data-lang="es">ES</a>

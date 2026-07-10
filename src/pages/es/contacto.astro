@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contacto">
+    <div class="max-w-2xl mx-auto flex flex-col gap-8 w-full pt-4">
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
+            TRABAJEMOS <span class="text-rose-500">JUNTOS</span>
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-lg">¿Listo para aumentar tus visualizaciones? Envíame un mensaje detallando tu proyecto y te responderé lo antes posible.</p>
+        
+        <form id="contact-form" action="https://formspree.io/f/mzdlnglw" method="POST" class="flex flex-col gap-6 mt-4" novalidate>
+            <div class="flex flex-col gap-2">
+                <label for="name" class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Nombre</label>
+                <input type="text" id="name" name="name" required class="bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500 transition-colors shadow-sm dark:shadow-none">
+                <span id="name-error" class="text-rose-500 text-xs font-medium hidden">Por favor, introduce tu nombre.</span>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <label for="email" class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Email</label>
+                <input type="email" id="email" name="email" required class="bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500 transition-colors shadow-sm dark:shadow-none">
+                <span id="email-error" class="text-rose-500 text-xs font-medium hidden">Por favor, introduce un email válido.</span>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <label for="message" class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Mensaje</label>
+                <textarea id="message" name="message" rows="5" required class="bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-rose-500 transition-colors resize-none shadow-sm dark:shadow-none"></textarea>
+                <span id="message-error" class="text-rose-500 text-xs font-medium hidden">Por favor, introduce un mensaje.</span>
+            </div>
+            
+            <button type="submit" class="mt-2 px-8 py-4 bg-rose-500 text-black font-black uppercase tracking-wider rounded hover:bg-rose-600 transition-colors self-start cursor-pointer">Enviar Mensaje →</button>
+        </form>
+        
+        <div class="mt-12 pt-8 border-t border-slate-200 dark:border-white/5">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">O si lo prefieres, escríbeme directamente a: <a href="mailto:djtejedoromero2015@gmail.com" class="text-rose-500 font-bold hover:underline">djtejedoromero2015@gmail.com</a></p>
+        </div>
+    </div>
+</BaseLayout>
+
+<script>
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+
+    const validateEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const showError = (input: HTMLElement, errorElement: HTMLElement | null, message: string) => {
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+        input.classList.add('border-rose-500', 'ring-1', 'ring-rose-500');
+        input.classList.remove('border-slate-300', 'dark:border-white/10');
+    };
+
+    const hideError = (input: HTMLElement, errorElement: HTMLElement | null) => {
+        if (errorElement) {
+            errorElement.classList.add('hidden');
+        }
+        input.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+        input.classList.add('border-slate-300', 'dark:border-white/10');
+    };
+
+    const validateField = (input: HTMLInputElement | HTMLTextAreaElement, errorElement: HTMLElement | null) => {
+        if (!input.value.trim()) {
+            showError(input, errorElement, 'Este campo es obligatorio.');
+            return false;
+        }
+        
+        if (input.type === 'email' && !validateEmail(input.value)) {
+            showError(input, errorElement, 'Por favor, introduce un email válido.');
+            return false;
+        }
+
+        hideError(input, errorElement);
+        return true;
+    };
+
+    if (form) {
+        nameInput?.addEventListener('input', () => validateField(nameInput, nameError));
+        nameInput?.addEventListener('blur', () => validateField(nameInput, nameError));
+        
+        emailInput?.addEventListener('input', () => validateField(emailInput, emailError));
+        emailInput?.addEventListener('blur', () => validateField(emailInput, emailError));
+        
+        messageInput?.addEventListener('input', () => validateField(messageInput, messageError));
+        messageInput?.addEventListener('blur', () => validateField(messageInput, messageError));
+        
+        form.addEventListener('submit', (e) => {
+            const isNameValid = validateField(nameInput, nameError);
+            const isEmailValid = validateField(emailInput, emailError);
+            const isMessageValid = validateField(messageInput, messageError);
+
+            if (!isNameValid || !isEmailValid || !isMessageValid) {
+                e.preventDefault();
+            }
+        });
+    }
+</script>

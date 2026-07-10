@@ -1,0 +1,34 @@
+---
+// Script de redirección en la raíz
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting... | AZCRAY.design</title>
+    <style>
+        body { background-color: #0f0f0f; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; }
+    </style>
+    <script>
+        const getPreferredLanguage = () => {
+            const stored = localStorage.getItem('lang-preference');
+            if (stored) return stored;
+            
+            const browserLang = navigator.language.toLowerCase();
+            if (browserLang.startsWith('es')) return 'es';
+            return 'en';
+        };
+
+        const lang = getPreferredLanguage();
+        localStorage.setItem('lang-preference', lang);
+        
+        // Manejando el basePath dinámicamente si es necesario, o directamente a /lang/
+        const basePath = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+        window.location.href = `${basePath}/${lang}/`;
+    </script>
+</head>
+<body>
+    <p>Redirecting to your preferred language...</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+    "nav": {
+        "gallery": "Galería",
+        "about": "Acerca de",
+        "pricing": "Precios",
+        "contact": "Contacto"
+    },
+    "footer": {
+        "available": "DISPONIBLE PARA PROYECTOS",
+        "cta": "SOLICITAR PRESUPUESTO",
+        "tagline": "DISEÑO DE MINIATURAS"
+    },
+    "routes": {
+        "about": "acerca-de-mi",
+        "pricing": "precios",
+        "contact": "contacto"
+    },
+    "gallery": {
+        "title": "MINIATURAS QUE",
+        "titleHighlight": "VENDEN.",
+        "subtitle": "Diseño estratégico orientado al CTR para creadores que buscan dominar el algoritmo. Optimizado para retención visual y clics garantizados.",
+        "filters": {
+            "all": "Todas",
+            "gaming": "Videojuegos",
+            "football": "Fútbol",
+            "entertainment": "Entretenimiento"
+        },
+        "categoryLabel": "Categoría:"
+    }
+}

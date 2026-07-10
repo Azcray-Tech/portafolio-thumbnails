@@ -1,0 +1,30 @@
+{
+    "nav": {
+        "gallery": "Gallery",
+        "about": "About",
+        "pricing": "Pricing",
+        "contact": "Contact"
+    },
+    "footer": {
+        "available": "AVAILABLE FOR PROJECTS",
+        "cta": "REQUEST A QUOTE",
+        "tagline": "THUMBNAIL DESIGNER"
+    },
+    "routes": {
+        "about": "about-me",
+        "pricing": "pricing",
+        "contact": "contact"
+    },
+    "gallery": {
+        "title": "THUMBNAILS THAT",
+        "titleHighlight": "CONVERT.",
+        "subtitle": "Strategic, CTR-oriented design for creators looking to dominate the algorithm. Optimized for visual retention and guaranteed clicks.",
+        "filters": {
+            "all": "All",
+            "gaming": "Gaming",
+            "football": "Football",
+            "entertainment": "Entertainment"
+        },
+        "categoryLabel": "Category:"
+    }
+}

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Precios">
-    <div class="max-w-5xl mx-auto flex flex-col gap-12 w-full items-center pt-4">
+    <div class="max-w-5xl mx-auto flex flex-col gap-12 w-full items-center pt-4 pb-20">
         <div class="text-center">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-4">
                 PLANES Y <span class="text-rose-500">PRECIOS</span>
@@ -20,11 +20,10 @@ const base = import.meta.env.BASE_URL;
                     <li class="flex gap-2 items-center">✓ 2 Revisiones</li>
                     <li class="flex gap-2 items-center">✓ Entrega en 48h</li>
                 </ul>
-                <a href={`${base}/es/contacto`} class="w-full text-center px-4 py-3 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors border border-slate-200 dark:border-white/10 rounded font-bold uppercase text-xs tracking-wider mt-4 block text-slate-700 dark:text-white">Elegir Plan</a>
             </div>
             
             <div class="bg-white dark:bg-white/5 border-2 border-rose-500 rounded-xl p-8 flex flex-col gap-6 relative transform md:-translate-y-4 shadow-xl shadow-rose-500/5 dark:shadow-rose-500/10">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">Más popular</div>
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">Más popular</div>
                 <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">Estándar</h3>
                 <div class="text-4xl font-black text-rose-500">$10<span class="text-base text-slate-500 font-normal">/miniatura</span></div>
                 <ul class="flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-300 flex-1">
@@ -33,7 +32,6 @@ const base = import.meta.env.BASE_URL;
                     <li class="flex gap-2 items-center">✓ Archivo fuente (PSD)</li>
                     <li class="flex gap-2 items-center">✓ Entrega en 24h</li>
                 </ul>
-                <a href={`${base}/es/contacto`} class="w-full text-center px-4 py-3 bg-rose-500 text-black hover:bg-rose-600 transition-colors rounded font-bold uppercase text-xs tracking-wider mt-4 block">Elegir Plan</a>
             </div>
             
             <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-8 flex flex-col gap-6 shadow-sm dark:shadow-none">
@@ -45,7 +43,6 @@ const base = import.meta.env.BASE_URL;
                     <li class="flex gap-2 items-center">✓ Archivo fuente (PSD)</li>
                     <li class="flex gap-2 items-center">✓ Entrega en 48h</li>
                 </ul>
-                <a href={`${base}/es/contacto`} class="w-full text-center px-4 py-3 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors border border-slate-200 dark:border-white/10 rounded font-bold uppercase text-xs tracking-wider mt-4 block text-slate-700 dark:text-white">Elegir Plan</a>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ const currentLocale = Astro.currentLocale || 'es';
 const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
 ---
 <div class="flex justify-between items-end mb-8 flex-wrap gap-4">
-    <div class="max-w-xl">
+    <div class="max-w-4xl">
         <h1 class="text-4xl md:text-5xl font-black mb-2 tracking-tight uppercase">
             {i18n.gallery.title} <span class="text-rose-500">{i18n.gallery.titleHighlight}</span>
         </h1>
@@ -13,7 +13,7 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
         </p>
     </div>
     <div class="flex flex-wrap gap-2 mb-1" id="filter-buttons">
-        <button data-filter="all" class="filter-btn px-4 py-2 bg-rose-500 text-black text-xs font-bold rounded uppercase tracking-wider transition-colors cursor-pointer">{i18n.gallery.filters.all}</button>
+        <button data-filter="all" class="filter-btn px-4 py-2 bg-rose-500 text-white text-xs font-bold rounded uppercase tracking-wider transition-colors cursor-pointer">{i18n.gallery.filters.all}</button>
         <button data-filter="gaming" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.gaming}</button>
         <button data-filter="football" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.football}</button>
         <button data-filter="entertainment" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.entertainment}</button>
@@ -50,11 +50,11 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
         button.addEventListener('click', () => {
             // Update active button styling
             buttons.forEach(btn => {
-                btn.classList.remove('bg-rose-500', 'text-black');
+                btn.classList.remove('bg-rose-500', 'text-white');
                 btn.classList.add('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10', 'text-slate-700', 'dark:text-slate-100');
             });
             button.classList.remove('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10', 'text-slate-700', 'dark:text-slate-100');
-            button.classList.add('bg-rose-500', 'text-black');
+            button.classList.add('bg-rose-500', 'text-white');
 
             const filter = button.getAttribute('data-filter');
 

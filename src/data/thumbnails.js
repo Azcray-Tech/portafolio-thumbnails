@@ -19,96 +19,102 @@ export const thumbnails = [
     },
     {
         id: 4,
+        src: "/images/The run bts dance practice made me run... - jaxson .webp",
+        category: "entertainment",
+        title: { es: "La práctica de baile de BTS me hizo correr...", en: "The BTS dance practice made me run..." }
+    },
+    {
+        id: 5,
         src: "/images/Historia-DMC-3.webp",
         category: "gaming",
         title: { es: "La Historia de Devil May Cry 3", en: "The Story of Devil May Cry 3" }
     },
     {
-        id: 5,
+        id: 6,
         src: "/images/Curiosidades-Devil-May-Cry-1-v2.webp",
         category: "gaming",
         title: { es: "Curiosidades de Devil May Cry 1", en: "Devil May Cry 1 Facts" }
     },
     {
-        id: 6,
+        id: 7,
         src: "/images/Como hicieron Killer Instinct 1994.webp",
         category: "gaming",
         title: { es: "Cómo Hicieron Killer Instinct (1994)", en: "How They Made Killer Instinct (1994)" }
     },
     {
-        id: 7,
+        id: 8,
         src: "/images/BMW-M3-GTR-Historia.webp",
         category: "gaming",
         title: { es: "La Historia del BMW M3 GTR", en: "The Story of the BMW M3 GTR" }
     },
     {
-        id: 8,
+        id: 9,
         src: "/images/Alien-insolation.webp",
         category: "gaming",
         title: { es: "Alien Isolation", en: "Alien Isolation" }
     },
     {
-        id: 9,
+        id: 10,
         src: "/images/Mi-Configuracion-en-CoD.webp",
         category: "gaming",
         title: { es: "Mi Configuración en CoD", en: "My CoD Setup" }
     },
     {
-        id: 10,
+        id: 11,
         src: "/images/Miniatura-Victor-Valdes.webp",
         category: "football",
         title: { es: "Víctor Valdés", en: "Victor Valdes" }
     },
     {
-        id: 11,
+        id: 12,
         src: "/images/Miniatura-Reinaldo-Rueda.webp",
         category: "football",
         title: { es: "Reinaldo Rueda", en: "Reinaldo Rueda" }
     },
     {
-        id: 12,
+        id: 13,
         src: "/images/Miniatura-Mbappe-v2.webp",
         category: "football",
         title: { es: "Mbappé", en: "Mbappé" }
     },
     {
-        id: 13,
+        id: 14,
         src: "/images/Miniatura-Leo-Messi.webp",
         category: "football",
         title: { es: "Leo Messi", en: "Leo Messi" }
     },
     {
-        id: 14,
+        id: 15,
         src: "/images/Miniatura-Lamine-Yamal.webp",
         category: "football",
         title: { es: "Lamine Yamal", en: "Lamine Yamal" }
     },
     {
-        id: 15,
+        id: 16,
         src: "/images/Miniatura-Infantino-y-Trum-Mundial.webp",
         category: "football",
         title: { es: "Infantino y Trump: El Mundial", en: "Infantino and Trump: The World Cup" }
     },
     {
-        id: 16,
+        id: 17,
         src: "/images/Miniatura-Antonio-valencia.webp",
         category: "football",
         title: { es: "Antonio Valencia", en: "Antonio Valencia" }
     },
     {
-        id: 17,
+        id: 18,
         src: "/images/Señora-de-90-años-pinta-cuadros-de-videojuegos.webp",
         category: "entertainment",
         title: { es: "Señora de 90 años pinta cuadros de videojuegos", en: "90-Year-Old Lady Paints Video Game Art" }
     },
     {
-        id: 18,
+        id: 19,
         src: "/images/Mini---Video-Reaccion-WESTCOL-VS-100-MUJERES.webp",
         category: "entertainment",
         title: { es: "WESTCOL VS 100 MUJERES", en: "WESTCOL VS 100 WOMEN" }
     },
     {
-        id: 19,
+        id: 20,
         src: "/images/Mini---Ligando-en-OmeTv.webp",
         category: "entertainment",
         title: { es: "Ligando en OmeTV", en: "Flirting on OmeTV" }

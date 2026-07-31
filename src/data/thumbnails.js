@@ -60,6 +60,12 @@ export const thumbnails = [
         title: { es: "Mi Configuración en CoD", en: "My CoD Setup" }
     },
     {
+        id: 21,
+        src: "/images/Miniatura-Cristiano-Ronaldo-Retiro.webp",
+        category: "football",
+        title: { es: "¿Qué Pasará Cuando Cristiano Ronaldo se Retire del Fútbol?", en: "What Happens When Cristiano Ronaldo Retires from Football?" }
+    },
+    {
         id: 11,
         src: "/images/Miniatura-Victor-Valdes.webp",
         category: "football",

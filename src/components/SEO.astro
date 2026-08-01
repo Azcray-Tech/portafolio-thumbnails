@@ -15,6 +15,24 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
 const imageUrl = new URL(import.meta.env.BASE_URL + image, Astro.site || Astro.url.origin);
+
+const esI18n = (await import('../i18n/es.json')).default;
+const enI18n = (await import('../i18n/en.json')).default;
+const currentLocale = Astro.currentLocale || 'es';
+const currentI18n = currentLocale === 'es' ? esI18n : enI18n;
+
+const base = import.meta.env.BASE_URL;
+const path = Astro.url.pathname;
+const relPath = path.startsWith(base) ? path.slice(base.length) : path;
+const slug = relPath.replace(/^\/(es|en)(?=\/|$)/, '').replace(/^\/+|\/+$/g, '');
+const routeKey = Object.keys(currentI18n.routes).find(key => currentI18n.routes[key] === slug);
+const esSlug = routeKey ? esI18n.routes[routeKey] : '';
+const enSlug = routeKey ? enI18n.routes[routeKey] : '';
+
+const site = Astro.site || Astro.url.origin;
+const esHref = new URL(base + (esSlug ? `/es/${esSlug}/` : '/es/'), site).href;
+const enHref = new URL(base + (enSlug ? `/en/${enSlug}/` : '/en/'), site).href;
+const xDefaultHref = new URL(base + (esSlug ? `/es/${esSlug}/` : '/es/'), site).href;
 ---
 
 <meta charset="utf-8" />
@@ -26,6 +44,11 @@ const imageUrl = new URL(import.meta.env.BASE_URL + image, Astro.site || Astro.u
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Hreflang alternates -->
+<link rel="alternate" hreflang="es" href={esHref} />
+<link rel="alternate" hreflang="en" href={enHref} />
+<link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

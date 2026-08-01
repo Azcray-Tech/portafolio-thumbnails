@@ -3,7 +3,7 @@ import { thumbnails } from '../data/thumbnails.js';
 const currentLocale = Astro.currentLocale || 'es';
 const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
 ---
-<div class="flex justify-between items-end mb-8 flex-wrap gap-4">
+<div class="mb-8">
     <div class="max-w-4xl">
         <h1 class="text-4xl md:text-5xl font-black mb-2 tracking-tight uppercase">
             {i18n.gallery.title} <span class="text-rose-500">{i18n.gallery.titleHighlight}</span>
@@ -12,7 +12,19 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
             {i18n.gallery.subtitle}
         </p>
     </div>
-    <div class="flex flex-wrap gap-2 mb-1" id="filter-buttons">
+</div>
+
+<div class="flex flex-col gap-4 mb-6">
+    <div>
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase text-slate-900 dark:text-white">
+            {i18n.gallery.sectionTitle}
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm md:text-base mt-2">
+            {i18n.gallery.sectionSubtitle}
+        </p>
+    </div>
+    <h3 class="sr-only">{i18n.gallery.categoriesTitle}</h3>
+    <div class="flex flex-wrap gap-2" id="filter-buttons">
         <button data-filter="all" class="filter-btn px-4 py-2 bg-rose-500 text-white text-xs font-bold rounded uppercase tracking-wider transition-colors cursor-pointer">{i18n.gallery.filters.all}</button>
         <button data-filter="gaming" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.gaming}</button>
         <button data-filter="football" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.football}</button>
@@ -34,21 +46,84 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
     ))}
 </div>
 
+<nav id="pagination" class="flex items-center justify-center gap-2 mt-8" aria-label={i18n.pagination.label}></nav>
+
 <!-- Vanilla JS Lightbox Implementation -->
 <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-    <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-rose-500 font-bold text-3xl p-2 cursor-pointer transition-colors z-[60]">✕</button>
+    <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-rose-500 font-bold text-3xl p-2 cursor-pointer transition-colors z-[60]" aria-label={i18n.lightbox.close}>✕</button>
+    <button id="lightbox-prev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white font-black text-2xl hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.previous}>&lt;</button>
+    <button id="lightbox-next" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white font-black text-2xl hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.next}>&gt;</button>
     <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl shadow-rose-500/10">
     <p id="lightbox-title" class="text-white mt-4 font-bold tracking-widest uppercase text-sm"></p>
 </div>
 
 <script>
-    // Client-side filtering logic
+    const PER_PAGE = 20;
     const buttons = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.thumbnail-card');
+    const pagination = document.getElementById('pagination');
+
+    let activeFilter = 'all';
+    let currentPage = 1;
+    let visibleCards = [];
+
+    const getFilteredCards = () => {
+        return Array.from(cards).filter(card => activeFilter === 'all' || card.getAttribute('data-category') === activeFilter);
+    };
+
+    const renderPagination = (totalPages) => {
+        if (!pagination) return;
+        pagination.innerHTML = '';
+
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            return;
+        }
+
+        pagination.style.display = 'flex';
+
+        for (let page = 1; page <= totalPages; page++) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = page;
+            btn.className = 'page-btn w-11 h-11 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 font-black text-sm transition-colors cursor-pointer hover:border-rose-500 dark:hover:border-rose-500';
+            if (page === currentPage) {
+                btn.classList.remove('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10');
+                btn.classList.add('bg-rose-500', 'text-white', 'border-rose-500');
+                btn.setAttribute('aria-current', 'page');
+            }
+            btn.addEventListener('click', () => {
+                currentPage = page;
+                applyView();
+            });
+            pagination.appendChild(btn);
+        }
+    };
+
+    const applyView = () => {
+        const filtered = getFilteredCards();
+        const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+        currentPage = Math.min(currentPage, totalPages);
+        visibleCards = [];
+
+        const start = (currentPage - 1) * PER_PAGE;
+        const end = start + PER_PAGE;
+
+        filtered.forEach((card, i) => {
+            if (i >= start && i < end) {
+                card.style.display = 'block';
+                card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
+                visibleCards.push(card);
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        renderPagination(totalPages);
+    };
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            // Update active button styling
             buttons.forEach(btn => {
                 btn.classList.remove('bg-rose-500', 'text-white');
                 btn.classList.add('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10', 'text-slate-700', 'dark:text-slate-100');
@@ -56,17 +131,9 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
             button.classList.remove('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10', 'text-slate-700', 'dark:text-slate-100');
             button.classList.add('bg-rose-500', 'text-white');
 
-            const filter = button.getAttribute('data-filter');
-
-            // Filter cards
-            cards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            activeFilter = button.getAttribute('data-filter');
+            currentPage = 1;
+            applyView();
         });
     });
 
@@ -75,29 +142,45 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxTitle = document.getElementById('lightbox-title');
     const closeBtn = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
 
-    document.querySelectorAll('[data-lightbox]').forEach(card => {
+    let lightboxIndex = 0;
+
+    const openLightbox = (card, index) => {
+        lightboxIndex = index;
+        showLightboxCard(card);
+        if (lightbox) {
+            lightbox.classList.remove('hidden');
+            lightbox.style.display = 'flex';
+            void lightbox.offsetWidth;
+            lightbox.classList.remove('opacity-0');
+            lightbox.classList.add('opacity-100');
+        }
+    };
+
+    const showLightboxCard = (card) => {
+        const img = card.querySelector('img');
+        const title = card.querySelector('p.text-sm');
+        if (img && lightboxImg) lightboxImg.src = img.src;
+        if (title && lightboxTitle) lightboxTitle.innerText = title.textContent || '';
+    };
+
+    const showLightboxAt = (index) => {
+        if (!visibleCards.length) return;
+        lightboxIndex = (index + visibleCards.length) % visibleCards.length;
+        showLightboxCard(visibleCards[lightboxIndex]);
+    };
+
+    document.querySelectorAll('[data-lightbox]').forEach((card) => {
         card.addEventListener('click', (e) => {
             e.preventDefault();
-            const img = card.querySelector('img');
-            const title = card.querySelector('p.text-sm');
-            
-            if(img && lightboxImg) lightboxImg.src = img.src;
-            if(title && lightboxTitle) lightboxTitle.innerText = title.textContent || '';
-            
-            if(lightbox) {
-                lightbox.classList.remove('hidden');
-                lightbox.style.display = 'flex';
-                // trigger reflow
-                void lightbox.offsetWidth;
-                lightbox.classList.remove('opacity-0');
-                lightbox.classList.add('opacity-100');
-            }
+            openLightbox(card, visibleCards.indexOf(card));
         });
     });
 
     const closeLightbox = () => {
-        if(!lightbox) return;
+        if (!lightbox) return;
         lightbox.classList.remove('opacity-100');
         lightbox.classList.add('opacity-0');
         setTimeout(() => {
@@ -106,13 +189,25 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
         }, 300);
     };
 
-    if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
-    if(lightbox) {
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showLightboxAt(lightboxIndex - 1); });
+    if (lightboxNext) lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showLightboxAt(lightboxIndex + 1); });
+
+    if (lightbox) {
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
     }
+
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) closeLightbox();
+        if (!lightbox) return;
+        const isOpen = !lightbox.classList.contains('hidden');
+        if (e.key === 'Escape' && isOpen) closeLightbox();
+        if (isOpen && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+            e.preventDefault();
+            showLightboxAt(e.key === 'ArrowLeft' ? lightboxIndex - 1 : lightboxIndex + 1);
+        }
     });
+
+    applyView();
 </script>

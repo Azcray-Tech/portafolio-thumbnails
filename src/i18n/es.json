@@ -25,6 +25,29 @@
             "football": "Fútbol",
             "entertainment": "Entretenimiento"
         },
-        "categoryLabel": "Categoría:"
+        "categoryLabel": "Categoría:",
+        "sectionTitle": "Mi portafolio",
+        "sectionSubtitle": "Una muestra de los diseños que he creado para distintos canales.",
+        "categoriesTitle": "Categorías"
+    },
+    "pagination": {
+        "label": "Paginación del portafolio"
+    },
+    "lightbox": {
+        "previous": "Miniatura anterior",
+        "next": "Miniatura siguiente",
+        "close": "Cerrar vista ampliada"
+    },
+    "cta": {
+        "title": "¿Listo para destacar tus videos?",
+        "subtitle": "Elige el servicio que mejor se adapte a tu canal y empieza a subir tu CTR hoy mismo.",
+        "button": "Ver precios →"
+    },
+    "pricing": {
+        "plansTitle": "Servicios"
+    },
+    "contact": {
+        "processTitle": "Sobre el proceso",
+        "processText": "Cuéntame los detalles de tu proyecto, el nicho de tu canal y tus referencias de estilo. Con eso, te propongo una miniatura a medida."
     }
 }

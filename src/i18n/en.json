@@ -25,6 +25,29 @@
             "football": "Football",
             "entertainment": "Entertainment"
         },
-        "categoryLabel": "Category:"
+        "categoryLabel": "Category:",
+        "sectionTitle": "My portfolio",
+        "sectionSubtitle": "A sample of the designs I've created for different channels.",
+        "categoriesTitle": "Categories"
+    },
+    "pagination": {
+        "label": "Portfolio pagination"
+    },
+    "lightbox": {
+        "previous": "Previous thumbnail",
+        "next": "Next thumbnail",
+        "close": "Close enlarged view"
+    },
+    "cta": {
+        "title": "Ready to make your videos stand out?",
+        "subtitle": "Pick the service that best fits your channel and start boosting your CTR today.",
+        "button": "See pricing →"
+    },
+    "pricing": {
+        "plansTitle": "Services"
+    },
+    "contact": {
+        "processTitle": "About the process",
+        "processText": "Tell me the details of your project, your channel's niche and your style references. With that, I'll craft a tailor-made thumbnail."
     }
 }

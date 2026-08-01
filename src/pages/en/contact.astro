@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const i18n = (await import('../../i18n/en.json')).default;
 ---
 <BaseLayout title="Contact">
     <div class="max-w-2xl mx-auto flex flex-col gap-8 w-full pt-4">
@@ -7,6 +8,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             LET'S WORK <span class="text-rose-500">TOGETHER</span>
         </h1>
         <p class="text-slate-500 dark:text-slate-400 text-lg">Ready to boost your views? Send me a message detailing your project and I'll get back to you as soon as possible.</p>
+        
+        <div class="flex flex-col gap-2">
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-wider">{i18n.contact.processTitle}</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{i18n.contact.processText}</p>
+        </div>
         
         <form id="contact-form" action="https://formspree.io/f/mzdlnglw" method="POST" class="flex flex-col gap-6 mt-4" novalidate>
             <div class="flex flex-col gap-2">

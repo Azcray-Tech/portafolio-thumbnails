@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
+const i18n = (await import('../../i18n/es.json')).default;
 ---
 <BaseLayout title="Precios">
     <div class="max-w-5xl mx-auto flex flex-col gap-12 w-full items-center pt-4 pb-20">
@@ -10,8 +11,10 @@ const base = import.meta.env.BASE_URL;
             </h1>
             <p class="text-slate-500 dark:text-slate-400 text-lg">Haz que cada video tenga la portada que se merece.</p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-4">
+
+        <div class="w-full">
+            <h2 class="sr-only">{i18n.pricing.plansTitle}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-4">
             <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-8 flex flex-col gap-6 shadow-sm dark:shadow-none">
                 <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">Básico</h3>
                 <div class="text-4xl font-black text-rose-500">$5<span class="text-base text-slate-500 font-normal">/miniatura</span></div>
@@ -44,6 +47,7 @@ const base = import.meta.env.BASE_URL;
                     <li class="flex gap-2 items-center">✓ Entrega en 48h</li>
                 </ul>
             </div>
+        </div>
         </div>
     </div>
 </BaseLayout>

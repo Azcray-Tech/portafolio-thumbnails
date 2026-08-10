@@ -49,6 +49,8 @@
     },
     "contact": {
         "processTitle": "About the process",
-        "processText": "Tell me the details of your project, your channel's niche and your style references. With that, I'll craft a tailor-made thumbnail."
+        "processText": "Tell me the details of your project, your channel's niche and your style references. With that, I'll craft a tailor-made thumbnail.",
+        "success": "Message sent! I'll get back to you as soon as possible.",
+        "error": "Something went wrong sending your message. Please try again or reach me on Instagram."
     }
 }

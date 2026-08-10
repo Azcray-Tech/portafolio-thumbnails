@@ -49,6 +49,8 @@
     },
     "contact": {
         "processTitle": "Sobre el proceso",
-        "processText": "Cuéntame los detalles de tu proyecto, el nicho de tu canal y tus referencias de estilo. Con eso, te propongo una miniatura a medida."
+        "processText": "Cuéntame los detalles de tu proyecto, el nicho de tu canal y tus referencias de estilo. Con eso, te propongo una miniatura a medida.",
+        "success": "¡Mensaje enviado! Te responderé lo antes posible.",
+        "error": "Hubo un error al enviar el mensaje. Inténtalo de nuevo o escríbeme por Instagram."
     }
 }

@@ -34,6 +34,7 @@ const i18n = (await import('../../i18n/en.json')).default;
             </div>
             
             <button type="submit" class="mt-2 px-8 py-4 bg-rose-500 text-white font-black uppercase tracking-wider rounded hover:bg-rose-600 transition-colors self-start cursor-pointer">Send Message →</button>
+            <p id="form-status" class="hidden mt-2 text-sm font-bold" data-success={i18n.contact.success} data-error={i18n.contact.error}></p>
         </form>
         
         <div class="mt-12 pt-8 border-t border-slate-200 dark:border-white/5">
@@ -51,6 +52,15 @@ const i18n = (await import('../../i18n/en.json')).default;
     const nameError = document.getElementById('name-error');
     const emailError = document.getElementById('email-error');
     const messageError = document.getElementById('message-error');
+    const formStatus = document.getElementById('form-status');
+
+    const setStatus = (message: string, isError: boolean) => {
+        if (!formStatus) return;
+        formStatus.textContent = message;
+        formStatus.classList.remove('hidden');
+        formStatus.classList.toggle('text-rose-500', isError);
+        formStatus.classList.toggle('text-emerald-500', !isError);
+    };
 
     const validateEmail = (email: string) => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -98,13 +108,36 @@ const i18n = (await import('../../i18n/en.json')).default;
         messageInput?.addEventListener('input', () => validateField(messageInput, messageError));
         messageInput?.addEventListener('blur', () => validateField(messageInput, messageError));
         
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             const isNameValid = validateField(nameInput, nameError);
             const isEmailValid = validateField(emailInput, emailError);
             const isMessageValid = validateField(messageInput, messageError);
 
             if (!isNameValid || !isEmailValid || !isMessageValid) {
                 e.preventDefault();
+                return;
+            }
+
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+            if (submitBtn) submitBtn.disabled = true;
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    setStatus(formStatus?.getAttribute('data-success') || '', false);
+                    form.reset();
+                } else {
+                    setStatus(formStatus?.getAttribute('data-error') || '', true);
+                }
+            } catch {
+                setStatus(formStatus?.getAttribute('data-error') || '', true);
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
             }
         });
     }

@@ -215,5 +215,11 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
         }
     });
 
+    // Bloquear menú contextual (Guardar imagen como...) en miniaturas y lightbox
+    cards.forEach(card => {
+        card.addEventListener('contextmenu', (e) => e.preventDefault());
+    });
+    lightboxImg.addEventListener('contextmenu', (e) => e.preventDefault());
+
     applyView();
 </script>

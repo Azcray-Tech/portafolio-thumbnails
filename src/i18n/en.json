@@ -32,7 +32,8 @@
         "categoriesTitle": "Categories"
     },
     "pagination": {
-        "label": "Portfolio pagination"
+        "label": "Portfolio pagination",
+        "pageLabel": "Go to page {page}"
     },
     "lightbox": {
         "previous": "Previous thumbnail",

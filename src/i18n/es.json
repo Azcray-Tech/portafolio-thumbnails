@@ -32,7 +32,8 @@
         "categoriesTitle": "Categorías"
     },
     "pagination": {
-        "label": "Paginación del portafolio"
+        "label": "Paginación del portafolio",
+        "pageLabel": "Ir a la página {page}"
     },
     "lightbox": {
         "previous": "Miniatura anterior",

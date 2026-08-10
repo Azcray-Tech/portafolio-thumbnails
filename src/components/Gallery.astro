@@ -47,7 +47,7 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
     ))}
 </div>
 
-<nav id="pagination" class="flex items-center justify-center gap-2 mt-8" aria-label={i18n.pagination.label}></nav>
+<nav id="pagination" class="flex items-center justify-center gap-2 mt-8" aria-label={i18n.pagination.label} data-page-label={i18n.pagination.pageLabel}></nav>
 
 <!-- Vanilla JS Lightbox Implementation -->
 <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
@@ -86,11 +86,13 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
         }
 
         pagination.style.display = 'flex';
+        const pageLabel = pagination.getAttribute('data-page-label') || '';
 
         for (let page = 1; page <= totalPages; page++) {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.textContent = page;
+            if (pageLabel) btn.setAttribute('aria-label', pageLabel.replace('{page}', String(page)));
             btn.className = 'page-btn w-11 h-11 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 font-black text-sm transition-colors cursor-pointer hover:border-rose-500 dark:hover:border-rose-500';
             if (page === currentPage) {
                 btn.classList.remove('bg-white', 'dark:bg-white/5', 'border-slate-200', 'dark:border-white/10');

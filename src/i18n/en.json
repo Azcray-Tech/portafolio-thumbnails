@@ -3,7 +3,8 @@
         "gallery": "Gallery",
         "about": "About",
         "pricing": "Pricing",
-        "contact": "Contact"
+        "contact": "Contact",
+        "themeToggle": "Toggle theme"
     },
     "footer": {
         "available": "AVAILABLE FOR PROJECTS",

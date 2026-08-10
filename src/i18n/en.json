@@ -36,7 +36,8 @@
     "lightbox": {
         "previous": "Previous thumbnail",
         "next": "Next thumbnail",
-        "close": "Close enlarged view"
+        "close": "Close enlarged view",
+        "copyright": "© Azcray Design {year}. All rights reserved."
     },
     "cta": {
         "title": "Ready to make your videos stand out?",

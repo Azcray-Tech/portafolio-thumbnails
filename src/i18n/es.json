@@ -36,7 +36,8 @@
     "lightbox": {
         "previous": "Miniatura anterior",
         "next": "Miniatura siguiente",
-        "close": "Cerrar vista ampliada"
+        "close": "Cerrar vista ampliada",
+        "copyright": "© Azcray Design {year}. Todos los derechos reservados."
     },
     "cta": {
         "title": "¿Listo para destacar tus videos?",

@@ -2,6 +2,7 @@
 import { thumbnails } from '../data/thumbnails.js';
 const currentLocale = Astro.currentLocale || 'es';
 const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
+const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new Date().getFullYear()));
 ---
 <div class="mb-8">
     <div class="max-w-4xl">
@@ -51,10 +52,15 @@ const i18n = (await import(`../i18n/${currentLocale}.json`)).default;
 <!-- Vanilla JS Lightbox Implementation -->
 <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
     <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-rose-500 font-bold text-3xl p-2 cursor-pointer transition-colors z-[60]" aria-label={i18n.lightbox.close}>✕</button>
-    <button id="lightbox-prev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white font-black text-2xl hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.previous}>&lt;</button>
-    <button id="lightbox-next" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white font-black text-2xl hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.next}>&gt;</button>
-    <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl shadow-rose-500/10">
+    <button id="lightbox-prev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.previous}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white hover:bg-rose-500 transition-colors cursor-pointer z-[60]" aria-label={i18n.lightbox.next}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <img id="lightbox-img" src="" class="max-w-[85%] max-h-[76.5vh] object-contain rounded shadow-2xl shadow-rose-500/10">
     <p id="lightbox-title" class="text-white mt-4 font-bold tracking-widest uppercase text-sm"></p>
+    <p id="lightbox-copyright" class="text-sm text-slate-300 mt-2 tracking-wide">{lightboxCopyright}</p>
 </div>
 
 <script>

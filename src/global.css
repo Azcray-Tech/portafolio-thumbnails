@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 html, body {
   @apply text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300;

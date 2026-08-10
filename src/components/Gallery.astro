@@ -71,7 +71,6 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
 
     let activeFilter = 'all';
     let currentPage = 1;
-    let visibleCards = [];
 
     const getFilteredCards = () => {
         return Array.from(cards).filter(card => activeFilter === 'all' || card.getAttribute('data-category') === activeFilter);
@@ -110,7 +109,6 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
         const filtered = getFilteredCards();
         const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
         currentPage = Math.min(currentPage, totalPages);
-        visibleCards = [];
 
         const start = (currentPage - 1) * PER_PAGE;
         const end = start + PER_PAGE;
@@ -123,7 +121,6 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
             if (i >= start && i < end) {
                 card.style.display = 'block';
                 card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-                visibleCards.push(card);
             }
         });
 
@@ -175,15 +172,16 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
     };
 
     const showLightboxAt = (index) => {
-        if (!visibleCards.length) return;
-        lightboxIndex = (index + visibleCards.length) % visibleCards.length;
-        showLightboxCard(visibleCards[lightboxIndex]);
+        const filtered = getFilteredCards();
+        if (!filtered.length) return;
+        lightboxIndex = (index + filtered.length) % filtered.length;
+        showLightboxCard(filtered[lightboxIndex]);
     };
 
     document.querySelectorAll('[data-lightbox]').forEach((card) => {
         card.addEventListener('click', (e) => {
             e.preventDefault();
-            openLightbox(card, visibleCards.indexOf(card));
+            openLightbox(card, getFilteredCards().indexOf(card));
         });
     });
 

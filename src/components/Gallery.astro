@@ -28,7 +28,7 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
     <div class="flex flex-wrap gap-2" id="filter-buttons">
         <button data-filter="all" class="filter-btn px-4 py-2 bg-rose-500 text-white text-xs font-bold rounded uppercase tracking-wider transition-colors cursor-pointer">{i18n.gallery.filters.all}</button>
         <button data-filter="gaming" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.gaming}</button>
-        <button data-filter="football" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.football}</button>
+        <button data-filter="sport" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.sport}</button>
         <button data-filter="entertainment" class="filter-btn px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-100 text-xs font-bold rounded uppercase tracking-wider hover:border-rose-500 dark:hover:border-rose-500 transition-colors cursor-pointer">{i18n.gallery.filters.entertainment}</button>
     </div>
 </div>
@@ -115,13 +115,15 @@ const lightboxCopyright = i18n.lightbox.copyright.replace('{year}', String(new D
         const start = (currentPage - 1) * PER_PAGE;
         const end = start + PER_PAGE;
 
+        Array.from(cards).forEach(card => {
+            card.style.display = 'none';
+        });
+
         filtered.forEach((card, i) => {
             if (i >= start && i < end) {
                 card.style.display = 'block';
                 card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
                 visibleCards.push(card);
-            } else {
-                card.style.display = 'none';
             }
         });
 

@@ -60,51 +60,57 @@ export const thumbnails = [
         title: { es: "Mi Configuración en CoD", en: "My CoD Setup" }
     },
     {
+        id: 22,
+        src: "/images/Miniatura-UFC-Desafio-Toda-La-Lógica.webp",
+        category: "sport",
+        title: { es: "5 veces que la UFC desafió toda lógica", en: "5 Times the UFC Defied All Logic" }
+    },
+    {
         id: 21,
         src: "/images/Miniatura-Cristiano-Ronaldo-Retiro.webp",
-        category: "football",
+        category: "sport",
         title: { es: "¿Qué Pasará Cuando Cristiano Ronaldo se Retire del Fútbol?", en: "What Happens When Cristiano Ronaldo Retires from Football?" }
     },
     {
         id: 11,
         src: "/images/Miniatura-Victor-Valdes.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Víctor Valdés", en: "Victor Valdes" }
     },
     {
         id: 12,
         src: "/images/Miniatura-Reinaldo-Rueda.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Reinaldo Rueda", en: "Reinaldo Rueda" }
     },
     {
         id: 13,
         src: "/images/Miniatura-Mbappe-v2.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Mbappé", en: "Mbappé" }
     },
     {
         id: 14,
         src: "/images/Miniatura-Leo-Messi.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Leo Messi", en: "Leo Messi" }
     },
     {
         id: 15,
         src: "/images/Miniatura-Lamine-Yamal.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Lamine Yamal", en: "Lamine Yamal" }
     },
     {
         id: 16,
         src: "/images/Miniatura-Infantino-y-Trum-Mundial.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Infantino y Trump: El Mundial", en: "Infantino and Trump: The World Cup" }
     },
     {
         id: 17,
         src: "/images/Miniatura-Antonio-valencia.webp",
-        category: "football",
+        category: "sport",
         title: { es: "Antonio Valencia", en: "Antonio Valencia" }
     },
     {

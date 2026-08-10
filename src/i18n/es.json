@@ -22,7 +22,7 @@
         "filters": {
             "all": "Todas",
             "gaming": "Videojuegos",
-            "football": "Fútbol",
+            "sport": "Deporte",
             "entertainment": "Entretenimiento"
         },
         "categoryLabel": "Categoría:",

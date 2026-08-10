@@ -22,7 +22,7 @@
         "filters": {
             "all": "All",
             "gaming": "Gaming",
-            "football": "Football",
+            "sport": "Sport",
             "entertainment": "Entertainment"
         },
         "categoryLabel": "Category:",
